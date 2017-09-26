@@ -6,12 +6,12 @@ guide:
     name: transfer-money-between-users
     step: '5'
 title:  "Step 5: Attach a verified funding source"
-description: Link a verified bank account to a customer record within Dwolla's bank transfer API. 
+description: Link a verified bank account to a customer record within Dwolla's bank transfer API.
 ---
 
 # Step 5: Attach a verified funding source
 
-Next you will attach a verified funding source for Joe Buyer, which will be done using Instant Account Verification (IAV). This method will give Joe Buyer the ability to add and verify his bank account in a matter of seconds by authenticating with his online banking credentials. Once Joe Buyer reaches the page in your application to add a bank account you'll ask Dwolla’s server to [generate an IAV token](http://docsv2.dwolla.com/#generate-an-iav-token). 
+Next you will attach a verified funding source for Joe Buyer, which will be done using Instant Account Verification (IAV). This method will give Joe Buyer the ability to add and verify his bank account in a matter of seconds by authenticating with his online banking credentials. Once Joe Buyer reaches the page in your application to add a bank account you'll ask Dwolla’s server to [generate an IAV token](http://docsv2.dwolla.com/#generate-an-iav-token).
 
 ##### Generate a single-use IAV token for our Customer, Joe Buyer:
 
@@ -62,12 +62,12 @@ print token['token'] # => 'lr0Ax1zwIpeXXt8sJDiVXjPbwEeGO6QKFWBIaKvnFG0Sm2j7vL'
 <?php
 $customersApi = new DwollaSwagger\CustomersApi($apiClient);
 
-$fsToken = $customersApi->getCustomerIavToken("https://api-sandbox.dwolla.com/customers/247B1BD8-F5A0-4B71-A898-F62F67B8AE1C");
-$fsToken->token; # => "lr0Ax1zwIpeXXt8sJDiVXjPbwEeGO6QKFWBIaKvnFG0Sm2j7vL"
+$iavToken = $customersApi->getCustomerIavToken("https://api-sandbox.dwolla.com/customers/247B1BD8-F5A0-4B71-A898-F62F67B8AE1C");
+$iavToken->token; # => "lr0Ax1zwIpeXXt8sJDiVXjPbwEeGO6QKFWBIaKvnFG0Sm2j7vL"
 ?>
 ```
 
-Then, you’ll pass this single-use IAV token to the client-side of your application where it will be used in the JavaScript function `dwolla.iav.start`. This token will be used to authenticate the request asking Dwolla to render the IAV flow. Before calling this function you'll want to include `dwolla.js` in the HEAD of your page. 
+Then, you’ll pass this single-use IAV token to the client-side of your application where it will be used in the JavaScript function `dwolla.iav.start`. This token will be used to authenticate the request asking Dwolla to render the IAV flow. Before calling this function you'll want to include `dwolla.js` in the HEAD of your page.
 
 ```html
 <head>
@@ -107,7 +107,7 @@ $('#start').click(function() {
 </script>
 ```
 
-Joe Buyer will complete the IAV flow by authenticating with his online banking credentials. You'll know his bank account was successfully added and verified if you receive a JSON response in your callback that includes a link to the newly created funding source. 
+Joe Buyer will complete the IAV flow by authenticating with his online banking credentials. You'll know his bank account was successfully added and verified if you receive a JSON response in your callback that includes a link to the newly created funding source.
 
 * Sample response:  `{"_links":{"funding-source":{"href":"https://api-sandbox.dwolla.com/funding-sources/80275e83-1f9d-4bf7-8816-2ddcd5ffc197"}}}`
 

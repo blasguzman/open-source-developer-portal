@@ -2,18 +2,18 @@
 layout: twoColumn
 section: guides
 type: guide
-guide: 
+guide:
     name: webhooks
     step: '3'
 title: Webhooks | Validating Webhooks
-description: Validating webhooks for payments within your application by utilizing our open API with no per transaction fees. 
+description: Validating webhooks for payments within your application by utilizing our open API with no per transaction fees.
 ---
 
 # Step 3: Validating webhooks
 
 Assume that your integration is an online marketplace, and that a customer just placed an order on your site. A few days after the customer initiated their payment, your application receives this webhook.
 
-The `topic` field of an event holds [a description](http://docsv2.dwolla.com/#events) of the event, which is similar the subject of an e-mail message.  The `webhook` itself contains _links to the resource impacted by the event that can be used to retrieve more information about the webhook you have received. 
+The `topic` field of an event holds [a description](http://docsv2.dwolla.com/#events) of the event, which is similar the subject of an e-mail message.  The `webhook` itself contains `_links` to the resource impacted by the event that can be used to retrieve more information about the webhook you have received.
 
 **NOTE**: The `event` must be retrieved with a `client_credentials` granted access_token.
 
@@ -91,7 +91,7 @@ function verifyGatewaySignature($proposedSignature, $webhookSecret, $payloadBody
 
 It is important to consider that multiple webhooks are fired for the same action on certain events. For example, multiple webhooks are fired for `Transfer` events, that is, two `transfer_created` events with different resource IDs (and, by extension, resource URLs) will be fired, one for each customer. To avoid doing any business logic twice, you would have to check if you have already received a webhook relating to the `Transfer` resource responsible for the event.
 
-To do this, keep a queue of events in a database and check to see if an `Event` has the same `self` resource location in `_links` as another event. If not, process the logic for that event. To illustrate, this is how a developer would implement this using Ruby and the ActiveRecord ORM. 
+To do this, keep a queue of events in a database and check to see if an `Event` has the same `self` resource location in `_links` as another event. If not, process the logic for that event. To illustrate, this is how a developer would implement this using Ruby and the ActiveRecord ORM.
 
 ##### Ruby/ActiveRecord
 ```rubynoselect

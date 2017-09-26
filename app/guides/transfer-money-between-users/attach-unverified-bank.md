@@ -6,14 +6,14 @@ guide:
     name: transfer-money-between-users
     step: '3'
 title:  "Step 3: Attach an unverified funding source"
-description: Link an unverified bank account to a customer within Dwolla's bank transfer API. 
+description: Link an unverified bank account to a customer within Dwolla's bank transfer API.
 ---
 
 # Step 3: Attach an unverified funding source
 
-Next, we’ll add Jane Merchant’s bank or credit union account as an unverified funding source.  Unverified funding sources can only receive funds, not send. 
+Next, we’ll add Jane Merchant’s bank or credit union account as an unverified funding source.  Unverified funding sources can only receive funds, not send.
 
-The example below shows sample bank information, but you will include actual bank name, routing, and account numbers after prompting your customer for this information within your application. Possible values for `type` can be either “checking” or “savings”. More detail is available in [API docs](https://docsv2.dwolla.com/#create-a-funding-source-for-a-customer). 
+The example below shows sample bank information, but you will include actual bank name, routing, and account numbers after prompting your customer for this information within your application. Possible values for `type` can be either “checking” or “savings”. More detail is available in [API docs](https://docsv2.dwolla.com/#create-a-funding-source-for-a-customer).
 
 ```raw
 POST https://api-sandbox.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C/funding-sources
@@ -23,7 +23,7 @@ Authorization: Bearer 0Sn0W6kzNicvoWhDbQcVSKLRUpGjIdlPSEYyrHqrDDoRnQwE7Q
 {
     "routingNumber": "222222226",
     "accountNumber": "123456789",
-    "type": "checking",
+    "bankAccountType": "checking",
     "name": "Jane Merchant"
 }
 
@@ -35,7 +35,7 @@ customer_url = 'https://api-sandbox.dwolla.com/customers/AB443D36-3757-44C1-A1B4
 request_body = {
   routingNumber: '222222226',
   accountNumber: '123456789',
-  type: 'checking',
+  bankAccountType: 'checking',
   name: 'Jane Merchant'
 }
 
@@ -52,7 +52,7 @@ var customerUrl = 'https://api-sandbox.dwolla.com/customers/AB443D36-3757-44C1-A
 var requestBody = {
   'routingNumber': '222222226',
   'accountNumber': '123456789',
-  'type': 'checking',
+  'bankAccountType': 'checking',
   'name': 'Jane Merchant'
 };
 
@@ -65,7 +65,7 @@ customer_url = 'https://api-sandbox.dwolla.com/customers/AB443D36-3757-44C1-A1B4
 request_body = {
   'routingNumber': '222222226',
   'accountNumber': '123456789',
-  'type': 'checking',
+  'bankAccountType': 'checking',
   'name': 'Jane Merchant'
 }
 
@@ -86,7 +86,7 @@ $customer = 'https://api.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB311
 $new_fs = $fsApi->createCustomerFundingSource($customer, array (
   'routingNumber' => '222222226',
   'accountNumber' => '123456789',
-  'type' => 'checking',
+  'bankAccountType' => 'checking',
   'name' => 'Jane Merchant',
 ));
 

@@ -9,9 +9,9 @@ description: "How to handle customer verification statuses before sending a bank
 
 # Handling verification statuses
 
-There are various reasons a Customer will result in a status other than `verified` which you will want to account for after the Customer is created. For example, the `retry` status can occur when an individual mis-keys or uses incorrect identifying information upon Customer creation. 
+There are various reasons a Customer will result in a status other than `verified` which you will want to account for after the Customer is created. For example, the `retry` status can occur when an individual mis-keys or uses incorrect identifying information upon Customer creation.
 
-#### Testing verification statuses in Sandbox: 
+#### Testing verification statuses in Sandbox:
 By submitting `verified`, `retry`, `document`, or `suspended` in the firstName parameter, you can create a new Verified Customer with that status. To get a Verified Customer with the `retry` status to `verified`, you need to POST to /customers/{id} with `verified` or anything else and the verified Customer will get `verified`.  The full SSN is required in the when updating a Customer with a `retry` verification status.  If only the last four of the SSN is submitted, Dwolla returns "invalid SSN", and initiating a POST again with a Full SSN will result in a `document` status.
 
 ### Handling status: `retry`
@@ -59,10 +59,6 @@ request_body = {
 # Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
 customer = app_token.post customer_url, request_body
 customer.id # => "132681fa-1b4d-4181-8ff2-619ca46235b1"
-
-# Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
-customer = DwollaSwagger::CustomersApi.update_customer(customer_url, :body => request_body)
-customer.id # => "132681fa-1b4d-4181-8ff2-619ca46235b1"
 ```
 ```javascript
 // Using dwolla-v2 - https://github.com/Dwolla/dwolla-v2-node
@@ -108,17 +104,14 @@ request_body = {
 # Using dwollav2 - https://github.com/Dwolla/dwolla-v2-python (Recommended)
 customer = app_token.post('customers', request_body)
 customer.body.id # => '132681fa-1b4d-4181-8ff2-619ca46235b1'
-
-# Using dwollaswagger - https://github.com/Dwolla/dwolla-swagger-python
-customers_api = dwollaswagger.CustomersApi(client)
-customer = customers_api.update_customer(customer_url, body = request_body)
-customer.id # => '132681fa-1b4d-4181-8ff2-619ca46235b1'
 ```
 ```php
 <?php
-$customersApi = DwollaSwagger\CustomersApi($apiClient);
+$customersApi = new DwollaSwagger\CustomersApi($apiClient);
 
-$retryCustomer = $customersApi->create(array (
+$customerId = 'https://api.dwolla.com/customers/132681fa-1b4d-4181-8ff2-619ca46235b1';
+
+$retryCustomer = $customersApi->updateCustomer(array (
   'firstName' => 'John',
   'lastName' => 'Doe',
   'email' => 'johndoe@nomail.net',
@@ -131,7 +124,7 @@ $retryCustomer = $customersApi->create(array (
   'postalCode' => '11385',
   'dateOfBirth' => '1990-07-11',
   'ssn' => '202-99-1516',
-));
+), $customerId);
 
 print($retryCustomer); # => 132681fa-1b4d-4181-8ff2-619ca46235b1
 ?>
@@ -153,13 +146,13 @@ If the Customer has a status of `document`, then you'll need to upload additiona
 * Sole Proprietorship: one or more of the following, as applicable to your sole proprietorship: Fictitious Business Name Statement; EIN documentation (IRS-issued SS4 confirmation letter); Color copy of a valid government-issued photo ID (e.g., a driver’s license, passport, or state ID card).
 
 ```raw
-curl -X POST 
-\ -H "Authorization: Bearer tJlyMNW6e3QVbzHjeJ9JvAPsRglFjwnba4NdfCzsYJm7XbckcR" 
-\ -H "Accept: application/vnd.dwolla.v1.hal+json" 
-\ -H "Cache-Control: no-cache" 
-\ -H "Content-Type: multipart/form-data" 
-\ -F "documentType=passport" 
-\ -F "file=@foo.png" 
+curl -X POST
+\ -H "Authorization: Bearer tJlyMNW6e3QVbzHjeJ9JvAPsRglFjwnba4NdfCzsYJm7XbckcR"
+\ -H "Accept: application/vnd.dwolla.v1.hal+json"
+\ -H "Cache-Control: no-cache"
+\ -H "Content-Type: multipart/form-data"
+\ -F "documentType=passport"
+\ -F "file=@foo.png"
 \ 'https://api-sandbox.dwolla.com/customers/132681fa-1b4d-4181-8ff2-619ca46235b1/documents'
 
 HTTP/1.1 201 Created
@@ -218,7 +211,7 @@ If the document was sufficient, the Customer will be verified. If not, we may ne
 If the document was found to be fraudulent or doesn’t match the identity of the Customer, they will be suspended.
 
 #### Document failure
-If you receive a `customer_verification_document_failed` webhook, you’ll need to upload another document. The document can fail if, for example, the Customer uploaded the wrong type of document or the `.jpg` or `.png` file supplied was not readable (i.e. blurry, not well lit, or cuts off a portion of the identifying image). To retrieve the failure reason for the document upload, you’ll retrieve the document by its id. Contained in the response will be a `failureReason` which corresponds to one of the following values:
+If you receive a `customer_verification_document_failed` webhook, you’ll need to upload another document. The document can fail if, for example, the Customer uploaded the wrong type of document or the uploaded image was not readable (i.e. blurry, not well lit, or cuts off a portion of the identifying image). To retrieve the failure reason for the document upload, you’ll retrieve the document by its id. Contained in the response will be a `failureReason` which corresponds to one of the following values:
 
 * ScanNotReadable
 * ScanNotUploaded
@@ -254,10 +247,6 @@ document_url = 'https://api.dwolla.com/documents/11fe0bab-39bd-42ee-bb39-275afcc
 # Using DwollaV2 - https://github.com/Dwolla/dwolla-v2-ruby (Recommended)
 document = app_token.get document_url
 document.failureReason # => "ScanNotReadable"
-
-# Using DwollaSwagger - https://github.com/Dwolla/dwolla-swagger-ruby
-document = DwollaSwagger::DocumentsApi.get_document(document_url)
-document.failureReason # => "ScanNotReadable"
 ```
 ```javascript
 var documentUrl = 'https://api.dwolla.com/documents/11fe0bab-39bd-42ee-bb39-275afcc050d0';
@@ -274,19 +263,14 @@ document_url = 'https://api.dwolla.com/documents/11fe0bab-39bd-42ee-bb39-275afcc
 # Using dwollav2 - https://github.com/Dwolla/dwolla-v2-python (Recommended)
 documents = app_token.get(document_url)
 documents.body['failureReason'] # => 'ScanNotReadable'
-
-# Using dwollaswagger - https://github.com/Dwolla/dwolla-swagger-python
-documents_api = dwollaswagger.DocumentsApi(client)
-document = documents_api.get_customer(document_url)
-document.failureReason # => "ScanNotReadable"
 ```
 ```php
 <?php
 $aDocument = 'https://api.dwolla.com/documents/11fe0bab-39bd-42ee-bb39-275afcc050d0';
 
-$documentsApi = DwollaSwagger\DocumentsApi($apiClient);
+$documentsApi = new DwollaSwagger\DocumentsApi($apiClient);
 
-$retrieved = $documentsApi->getCustomer($aDocument);
+$retrieved = $documentsApi->getDocument($aDocument);
 print($retrieved->failureReason); # => "ScanNotReadable"
 ?>
 ```

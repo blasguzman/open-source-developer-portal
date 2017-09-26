@@ -1,12 +1,12 @@
 ---
 layout: twoColumn
 section: guides
-guide: 
+guide:
     name: send-money
     step: 1a
 type: guide
 title:  "Step 1: Access API onboarding"
-description: Use Dwolla's ACH payment API to send money to other users. 
+description: Use Dwolla's ACH payment API to send money to other users.
 ---
 
 # Step 1: Create recipients using the Access API
@@ -115,15 +115,15 @@ catch (Exception e) {
 }
 ```
 
-When the Customer is created, you’ll receive the Customer URL in the location header. 
+When the Customer is created, you’ll receive the Customer URL in the location header.
 
 *Important*: Provide the IP address of the end-user accessing your application as the ipAddress parameter. This enhances Dwolla’s  ability to detect fraud.
 
 ### Step C. Attach a funding source to the Customer
 
-The next step is to attach a bank or credit union account to the Customer by providing the bank account’s routing number, account number, account type, and an arbitrary name. 
+The next step is to attach a bank or credit union account to the Customer by providing the bank account’s routing number, account number, account type, and an arbitrary name.
 
-Funds transferred to this Customer will be automatically swept into the funding source. The example below shows sample bank information, but you will include actual routing, account, and bank name after prompting your customer for this information within your application. Possible values for `type` can be either “checking” or “savings”. More detail is available in [API docs](https://docsv2.dwolla.com/#create-a-funding-source-for-a-customer). 
+Funds transferred to this Customer will be automatically swept into the funding source. The example below shows sample bank information, but you will include actual routing, account, and bank name after prompting your customer for this information within your application. Possible values for `type` can be either “checking” or “savings”. More detail is available in [API docs](https://docsv2.dwolla.com/#create-a-funding-source-for-a-customer).
 
 ```raw
 POST https://api.dwolla.com/customers/c7f300c0-f1ef-4151-9bbe-005005aa3747/funding-sources
@@ -133,7 +133,7 @@ Authorization: Bearer 0Sn0W6kzNicvoWhDbQcVSKLRUpGjIdlPSEYyrHqrDDoRnQwE7Q
 {
     "routingNumber": "222222226",
     "accountNumber": "123456789",
-    "type": "checking",
+    "bankAccountType": "checking",
     "name": "Jane Merchant - Checking 6789"
 }
 
@@ -145,7 +145,7 @@ customer_url = 'https://api-sandbox.dwolla.com/customers/c7f300c0-f1ef-4151-9bbe
 request_body = {
   routingNumber: '222222226',
   accountNumber: '123456789',
-  type: 'checking',
+  bankAccountType: 'checking',
   name: 'Jane Merchant - Checking 6789'
 }
 
@@ -162,7 +162,7 @@ var customerUrl = 'https://api-sandbox.dwolla.com/customers/c7f300c0-f1ef-4151-9
 var requestBody = {
   'routingNumber': '222222226',
   'accountNumber': '123456789',
-  'type': 'checking',
+  'bankAccountType': 'checking',
   'name': 'Jane Merchant - Checking 6789'
 };
 
@@ -177,7 +177,7 @@ customer_url = 'https://api-sandbox.dwolla.com/customers/c7f300c0-f1ef-4151-9bbe
 request_body = {
   'routingNumber': '222222226',
   'accountNumber': '123456789',
-  'type': 'checking',
+  'bankAccountType': 'checking',
   'name': 'Jane Merchant - Checking 6789'
 }
 
@@ -197,7 +197,7 @@ $fundingApi = new DwollaSwagger\FundingsourcesApi($apiClient);
 $new_fs = $fundingApi->createCustomerFundingSource([
   "routingNumber" => "222222226",
   "accountNumber" => "123456789",
-  "type" => "checking",
+  "bankAccountType" => "checking",
   "name" => "Jane Merchant - Checking 6789"
 ], "https://api-sandbox.dwolla.com/customers/c7f300c0-f1ef-4151-9bbe-005005aa3747");
 

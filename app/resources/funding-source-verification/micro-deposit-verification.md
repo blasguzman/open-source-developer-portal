@@ -56,7 +56,7 @@ retrieved.name # => "Test checking account"
 <?php
 $fund_source = 'https://api.dwolla.com/funding-sources/e52006c3-7560-4ff1-99d5-b0f3a6f4f909';
 
-$fsApi = DwollaSwagger\FundingsourcesApi($apiClient);
+$fsApi = new DwollaSwagger\FundingsourcesApi($apiClient);
 
 $retrieved = $fsApi->id($fund_source);
 print($retrieved->name); # => "Test checking account"
@@ -84,7 +84,7 @@ accountToken
   });
 ```
 
-### Initiate micro-deposits 
+### Initiate micro-deposits
 Once you POST to the [initiate-micro-deposits](https://docsv2.dwolla.com/#initiate-micro-deposits) link, Dwolla will send two small amounts to your customer's bank or credit union account. If the request is successful, Dwolla returns a `HTTP 201` and a link to the created micro-deposits resource `funding-sources/{id}/micro-deposits` in the location header. The micro-deposits resource can be later used to retrieve the status of micro-deposits or verify micro-deposit amounts. If your application is subscribed to webhooks, a webhook will be sent with the `microdeposits_added` event, notifying your application that micro-deposits are en route to your customer’s bank account.
 
 ```raw
@@ -131,7 +131,7 @@ $micro_deposits = $fsApi->micro_deposits($retrieved);
 ### Verify micro-deposits
 In the Dwolla production environment, you must wait until the micro-deposits actually post to the customer’s bank account before the account can be verified, which can take 1-2 business days. A `microdeposits_completed` event will be triggered once micro-deposits have successfully posted to the bank. Once micro-deposits have completed, a `verify-micro-deposits` link relation will return on the funding source letting your application know the funding source can be verified.
 
-**Note**: In the Sandbox environment, any amount **below** $0.10 will allow you to verify the account immediately. 
+**Note**: In the Sandbox environment, any amount **below** $0.10 will allow you to verify the account immediately.
 
 ```raw
 POST /funding-sources/e52006c3-7560-4ff1-99d5-b0f3a6f4f909/micro-deposits
@@ -212,7 +212,7 @@ $fundingSourceUrl = 'https://api-sandbox.dwolla.com/funding-sources/e52006c3-756
 
 $fsApi = new DwollaSwagger\FundingsourcesApi($apiClient);
 
-$fsApi->micro_deposits($fundingSourceUrl, [
+$fsApi->micro_deposits([
   'amount1' => [
     'value' => '0.03',
     'currency' => 'USD'
@@ -221,7 +221,7 @@ $fsApi->micro_deposits($fundingSourceUrl, [
     'value' => '0.09',
     'currency' => 'USD'
   ]
-]);
+], $fundingSourceUrl);
 ?>
 ```
 

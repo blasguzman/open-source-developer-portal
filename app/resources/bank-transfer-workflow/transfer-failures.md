@@ -13,7 +13,7 @@ description: "How to handle transfer failures in a bank transfer API to programm
 
 There are several reasons bank transfers can fail, a few of which are outlined below. When a transfer fails it is usually a result of an ACH failure which is assigned an ACH return code after being rejected from the financial institution. A few common failure cases include:
 
-- **Insufficient Funds (R01):** Pending transfers can fail due to insufficient funds from the source bank account. 
+- **Insufficient Funds (R01):** Pending transfers can fail due to insufficient funds from the source bank account.
 - **No Account/Unable to Locate Account (R03):** The recipient of a transfer has closed their bank account or has incorrectly entered their bank account/routing number when attaching their funding source.
 - **Customer Advises Not Authorized (R10):** The owner of a bank account has told their bank that this transfer was unauthorized.
 
@@ -21,11 +21,11 @@ There are several reasons bank transfers can fail, a few of which are outlined b
 
 Bank accounts will automatically be removed from the Dwolla system for all ACH return codes except an `R01`. If subscribed to webhooks, your application will receieve a webhook with the `funding_source_removed` event along with the `transfer_failed` event.
 
-When a bank transfer fails from a verified account (e.g. [Transfer CIP Verified](/resources/account-types/transfer-accounts.html) or [Access API Verified Customer](/resources/account-types/access-api-accounts.html) to a recipient), funds will return to the sending account’s Dwolla balance. For other transfer scenarios, funds will return to the source bank account. 
+When a bank transfer fails from a verified account (e.g. [Transfer CIP Verified](/resources/account-types/transfer-accounts.html) or [Access API Verified Customer](/resources/account-types/access-api-accounts.html) to a recipient), funds will return to the sending account’s Dwolla balance. For other transfer scenarios, funds will return to the source bank account.
 
 ### Retrieving the reason for a failed bank transfer
 
-When a bank transfer fails its status will be updated to `failed`. If your application is subscribed to webhooks, you’ll receive either the `transfer_failed` event if the transfer belongs to a Dwolla account or the `customer_transfer_failed` event if the transfer belongs to an Access API Customer. The event contains a links to the associated account as well as the transfer resource. To get the return code and reason for the transfer failure you’ll first retrieve the transfer by its ID. 
+When a bank transfer fails its status will be updated to `failed`. If your application is subscribed to webhooks, you’ll receive either the `transfer_failed` event if the transfer belongs to a Dwolla account or the `customer_transfer_failed` event if the transfer belongs to an Access API Customer. The event contains a links to the associated account as well as the transfer resource. To get the return code and reason for the transfer failure you’ll first retrieve the transfer by its ID.
 
 #### Request and response (view schema in 'raw')
 ```raw
@@ -145,7 +145,7 @@ failure.code # => "R1"
 <?php
 $transfer = '8997ebed-69be-e611-80ea-0aa34a9b2388';
 
-$TransfersApi = DwollaSwagger\TransfersApi($apiClient);
+$TransfersApi = new DwollaSwagger\TransfersApi($apiClient);
 
 $failureReason = $TransfersApi->failureById($transfer);
 print($failureReason->status); # => "R01"

@@ -6,12 +6,12 @@ guide:
     name: transfer-money-between-users
     step: '6'
 title:  "Step 6: Create a transfer"
-description: How to create a transfer between users when leveraging Dwolla's ACH payment API. 
+description: How to create a transfer between users when leveraging Dwolla's ACH payment API.
 ---
 
 # Step 6: Create a transfer
 
-[Create a transfer](https://docsv2.dwolla.com/#transfers) by specifying Joe Buyer’s funding source as the source and Jane Merchant’s funding source as the destination. 
+[Create a transfer](https://docsv2.dwolla.com/#transfers) by specifying Joe Buyer’s funding source as the source and Jane Merchant’s funding source as the destination.
 
 ```raw
 POST https://api-sandbox.dwolla.com/transfers
@@ -111,18 +111,18 @@ transfer # => 'https://api.dwolla.com/transfers/d76265cd-0951-e511-80da-0aa34a9b
 ```php
 <?php
 $transfer_request = array (
-  '_links' => 
+  '_links' =>
   array (
-    'source' => 
+    'source' =>
     array (
       'href' => 'https://api-sandbox.dwolla.com/funding-sources/80275e83-1f9d-4bf7-8816-2ddcd5ffc197',
     ),
-    'destination' => 
+    'destination' =>
     array (
       'href' => 'https://api-sandbox.dwolla.com/funding-sources/375c6781-2a17-476c-84f7-db7d2f6ffb31',
     ),
   ),
-  'amount' => 
+  'amount' =>
   array (
     'currency' => 'USD',
     'value' => '225.00',
@@ -130,9 +130,9 @@ $transfer_request = array (
 );
 
 $transferApi = new DwollaSwagger\TransfersApi($apiClient);
-$myAccount = $transferApi->create($transfer_request);
+$transfer = $transferApi->create($transfer_request);
 
-print($xfer); # => https://api-sandbox.dwolla.com/transfers/d76265cd-0951-e511-80da-0aa34a9b2388
+print($transfer); # => https://api-sandbox.dwolla.com/transfers/d76265cd-0951-e511-80da-0aa34a9b2388
 ?>
 ```
 

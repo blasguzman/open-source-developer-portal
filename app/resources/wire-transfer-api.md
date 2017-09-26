@@ -35,7 +35,7 @@ Authorization: Bearer pBA9fVDBEyYZCEsLf/wKehyh1RTpzjUj5KzIRfDi0wKTii7DqY
 {
   "routingNumber": "222222226",
   "accountNumber": "123456789",
-  "type": "checking",
+  "bankAccountType": "checking",
   "name": "Jane Doe’s Checking",
   "channels": ["wire"]
 }
@@ -54,7 +54,7 @@ customer_url = 'https://api-sandbox.dwolla.com/customers/99bfb139-eadd-4cdf-b346
 request_body = {
   routingNumber: '222222226',
   accountNumber: '123456789',
-  type: 'checking',
+  bankAccountType: 'checking',
   name: 'Jane Doe’s Checking',
   channels: [
     'wire'
@@ -77,9 +77,9 @@ var customerUrl = 'https://api-sandbox.dwolla.com/customers/99bfb139-eadd-4cdf-b
 var requestBody = {
   'routingNumber': '222222226',
   'accountNumber': '123456789',
-  'type': 'checking',
+  'bankAccountType': 'checking',
   'name': 'Jane Doe’s Checking',
-  'items': [
+  'channels': [
     'wire'
   ]
 };
@@ -91,7 +91,7 @@ appToken
 
 
 ### Initiating a wire transfer
-When initiating the wire transfer out of the Dwolla platform we'll need to specify the *source* as our `balance` and the *destination* as the `wire` funding source we created in the previous step. 
+When initiating the wire transfer out of the Dwolla platform we'll need to specify the *source* as our `balance` and the *destination* as the `wire` funding source we created in the previous step.
 
 In order to obtain the Customer's `balance` funding source, you'll need to fetch the [list of funding sources](https://docsv2.dwolla.com/#list-funding-sources-for-a-customer) for the Customer. The balance funding source should be made available when the Customer has a status of `verified`.
 

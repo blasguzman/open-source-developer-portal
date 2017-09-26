@@ -10,17 +10,17 @@ description: "Programmatically verify a bank to initiate a bank transfer using i
 # Funding source verification
 
 ## Instant account verification (IAV)
-Instant Account Verification (IAV) gives you the ability to add and verify a Customer's bank account in a matter of seconds, which is much faster than the multiple days required for micro-deposits to transfer and then be verified by the Customer. Your application will utilize the client-side `dwolla.js` JavaScript library to render the IAV flow within a container in your application. 
+Instant Account Verification (IAV) gives you the ability to add and verify a Customer's bank account in a matter of seconds, which is much faster than the multiple days required for micro-deposits to transfer and then be verified by the Customer. Your application will utilize the client-side `dwolla.js` JavaScript library to render the IAV flow within a container in your application.
 
 <ol class="alerts">
     <li class="alert icon-alert-info">This article will walk through IAV functionality using dwolla.js which is only available for Access API integrations. For more information about the Access API, please <a href="https://www.dwolla.com/contact">contact sales</a>.</li>
 </ol>
 
 ### Step 1: Generate a single-use IAV token for a Customer
-To initiate the IAV flow, dwolla.js requires a single-use IAV token for a Customer. Your server initiates a POST request to Dwolla, specifying for which Customer you want to add/verify a bank account. Dwolla will respond with a non-expiring single-use `token`. This IAV token will be sent to the client and used to authenticate the HTTP request asking Dwolla to render the IAV flow. 
+To initiate the IAV flow, dwolla.js requires a single-use IAV token for a Customer. Your server initiates a POST request to Dwolla, specifying for which Customer you want to add/verify a bank account. Dwolla will respond with a non-expiring single-use `token`. This IAV token will be sent to the client and used to authenticate the HTTP request asking Dwolla to render the IAV flow.
 
 ```raw
-curl -X POST 
+curl -X POST
 \ -H "Content-Type: application/vnd.dwolla.v1.hal+json"
 \ -H "Accept: application/vnd.dwolla.v1.hal+json"
 \ -H "Authorization: Bearer qe634nV7dIYpYDf3VGZPciziPU2BCboUZ7G7EG8XEyGswKkBV5"
@@ -68,13 +68,13 @@ print token['token'] # => 'lr0Ax1zwIpeXXt8sJDiVXjPbwEeGO6QKFWBIaKvnFG0Sm2j7vL'
 <?php
 $customersApi = new DwollaSwagger\CustomersApi($apiClient);
 
-$fsToken = $customersApi->getCustomerIavToken("https://api-sandbox.dwolla.com/customers/06b51d56-7a6c-4535-a0cc-2c0106f56ba6");
-$fsToken->token; # => "lr0Ax1zwIpeXXt8sJDiVXjPbwEeGO6QKFWBIaKvnFG0Sm2j7vL"
+$iavToken = $customersApi->getCustomerIavToken("https://api-sandbox.dwolla.com/customers/06b51d56-7a6c-4535-a0cc-2c0106f56ba6");
+$iavToken->token; # => "lr0Ax1zwIpeXXt8sJDiVXjPbwEeGO6QKFWBIaKvnFG0Sm2j7vL"
 ?>
 ```
 
 ### Step 2: Include dwolla.js and add container for IAV
-We'll begin the client-side implementation by including dwolla.js in the HEAD of our HTML page. Notice, we are utilizing development version 1 of dwolla.js, alternatively you can include the minified version of `<script src="https://cdn.dwolla.com/1/dwolla.min.js"></script>`. 
+We'll begin the client-side implementation by including dwolla.js in the HEAD of our HTML page. Notice, we are utilizing development version 1 of dwolla.js, alternatively you can include the minified version of `<script src="https://cdn.dwolla.com/1/dwolla.min.js"></script>`.
 
 ```htmlnoselect
 <head>
@@ -87,7 +87,7 @@ Next, add the container to the body of the page where you want to render the IAV
 ```htmlnoselect
 <div id="mainContainer">
 	<input type="button" id="start" value="Add Bank">
-</div>	
+</div>
 
 <div id="iavContainer"></div>
 ```
