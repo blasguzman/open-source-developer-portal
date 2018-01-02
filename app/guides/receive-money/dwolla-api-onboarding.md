@@ -3,7 +3,7 @@ layout: twoColumn
 section: guides
 guide: 
     name: receive-money
-    step: 1a
+    step: '1'
 type: guide
 title:  "Step 1: Access API onboarding"
 description: Leverage Dwolla's ach payment API to receive money via bank transfer.

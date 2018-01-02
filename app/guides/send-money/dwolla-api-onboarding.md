@@ -3,7 +3,7 @@ layout: twoColumn
 section: guides
 guide: 
     name: send-money
-    step: 1a
+    step: '1'
 type: guide
 title:  "Step 1: Dwolla API onboarding"
 description: Use Dwolla's ACH payment API to send money to other users. 
