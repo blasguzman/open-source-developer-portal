@@ -98,10 +98,13 @@ catch (Exception e) {
 }
 ```
 
+<ol class = "alerts">
+    <li class="alert icon-alert-info">
+      Provide the IP address of the end-user accessing your application as the `ipAddress` parameter. This enhances fraud detection and tracking.
+    </li>
+</ol>
+
 When the customer is created, you’ll receive the customer URL in the location header.
-
-**Important**: Provide the IP address of the end-user accessing your application as the ipAddress parameter. This enhances Dwolla’s ability to detect fraud. 
-
 
 <nav class="pager-nav">
     <a href="./attach-unverified-bank.html">Back: Attach an unverified funding source</a>

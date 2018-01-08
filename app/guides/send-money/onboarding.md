@@ -12,11 +12,11 @@ description: Use Dwolla's ACH payment API to send money to other users.
 
 In this experience, end users create their accounts entirely within your application and you prompt for their bank or credit union account information. Dwolla will securely store this sensitive information.
 
-### Step A. Obtain an application access token
+## Step 1A. Obtain an application access token
 
 Your application will exchange its `client_id`, `client_secret`, and `grant_type=client_credentials` for an [application access token](https://docsv2.dwolla.com/#application-authorization). An application access token can then be used to make calls to the API on behalf of your application.
 
-### Step B. Create a Customer
+## Step 1B. Create a Customer
 
 Create a Customer for each user you’d like to transfer funds to. At a minimum, provide the user’s full name, and email address to create the Customer. More detail is available in [API docs](https://docsv2.dwolla.com/#create-a-customer). For the purpose of this guide we'll be creating the `Unverified Customer` type, however if your use case doesn't require the need for your user to send funds then the `Receive-only Customer` type is recommended.
 
@@ -113,9 +113,15 @@ catch (Exception e) {
 
 When the Customer is created, you’ll receive the Customer URL in the location header.
 
-**Important**: Provide the IP address of the end-user accessing your application as the `ipAddress` parameter. This enhances fraud detection and tracking.
+<ol class = "alerts">
+    <li class="alert icon-alert-info">
+      Provide the IP address of the end-user accessing your application as the `ipAddress` parameter. This enhances fraud detection and tracking.
+    </li>
+</ol>
 
-### Step C. Attach a funding source to the Customer
+Looking to learn more about each Customer type and how it relates to your funds flow? Take a look at our [Account types article](https://developers.dwolla.com/resources/account-types.html) for more information.
+
+### Step 1C. Attach a funding source to the Customer
 
 The next step is to attach a bank or credit union account to the Customer by providing the bank account’s routing number, account number, account type, and an arbitrary name.
 

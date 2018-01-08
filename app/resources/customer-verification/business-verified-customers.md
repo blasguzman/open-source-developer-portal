@@ -38,7 +38,7 @@ As a developer, you can expect these events to be triggered when a business veri
 | businessClassification | yes | string | The industry classification id that corresponds to Customer’s business. |
 | businessType | yes | string | Business structure. Possible values are `corporation`, `llc`, `partnership`, and `soleproprietorship`. |
 | businessName | yes | string | Registered business name. |
-| ein | yes | Employer Identification Number. Note: If the businessType is `soleproprietorship` then ein can be omitted from the request. |
+| ein | yes | string | Employer Identification Number. Note: If the businessType is `soleproprietorship` then ein can be omitted from the request. |
 
 Once you submit this request, Dwolla will perform some initial validation to check for formatting issues such as an invalid date of birth, invalid email format, etc. If successful, the response will be a HTTP 201/Created with the URL of the new Customer resource contained in the Location header.
 
@@ -173,7 +173,7 @@ Businesses may need to provide additional information to help verify their ident
 
 Let’s check to see if the Customer was successfully verified or not. We are going to use the location of the Customer resource that we just created, which is in `new_customer`.
 
-Request:
+#### Request:
 
 ```raw
 GET https://api-sandbox.dwolla.com/customers/62c3aa1b-3a1b-46d0-ae90-17304d60c3d5
@@ -282,5 +282,6 @@ Note that while `document` status is not a deal-breaking issue which prevents a 
 ***
 
 View
+
 * [Personal verified Customers](/resources/customer-verification/personal-verified-customers.html) creation and verification
 * [Handling verification statuses](/resources/customer-verification/handling-verification-statuses.html) for Business verified Customers.

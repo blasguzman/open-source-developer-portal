@@ -10,12 +10,12 @@ description: Create subscription webhooks for payments within your application b
 ---
 
 # Step 2: Create a webhook subscription
+
 Each application can have multiple subscriptions associated to it. While one subscription is sufficient, you can create as many as you want for redundancy. 
 
 To make the following request, we need to use the `access_token` we just previously obtained. Security considerations:
 
 Your webhook endpoint should only be accessible over TLS (HTTPS) and your server should have a valid certificate. Your subscription should include a random, secret key, only known by your application. This secret key should be securely stored and used later when validating the authenticity of the webhook request from Dwolla.
- 
 
 ```raw
 POST https://api-sandbox.dwolla.com/webhook-subscriptions
@@ -69,7 +69,7 @@ $subscription; # => "https://api-sandbox.dwolla.com/webhook-subscriptions/5af4c1
 ?>
 ```
 
-You can retrieve your newly created subscription by its resource location:
+### Retrieve your newly created subscription by its resource location:
 
 ```raw
 GET https://api-sandbox.dwolla.com/webhook-subscriptions/5af4c10a-f6de-4ac8-840d-42cb65454216

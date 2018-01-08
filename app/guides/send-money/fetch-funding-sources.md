@@ -17,7 +17,7 @@ Now that you’ve created a Customer and associated its funding source, you can 
 
 Dwolla uses URLs to represent relations between resources. Therefore, you’ll need to provide the full URL of the funding source and recipient.
 
-### Fetch your Account's list of available funding sources
+## Fetch your Account's list of available funding sources
 
 Use the [list an account's funding sources](https://docsv2.dwolla.com/#list-funding-sources-for-an-account) endpoint to fetch a list of your own funding sources. You'll need your account URL which can be retrieved by calling [the Root](https://docsv2.dwolla.com/#root) of the API.
 

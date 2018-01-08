@@ -1,7 +1,7 @@
 ---
 layout: twoColumn
 section: resources
-type: article
+type: features
 title:  "Facilitator fee"
 description: "As a platform, earn revenue by collecting a portion of the transfer amount on payments facilitated between two users."
 ---

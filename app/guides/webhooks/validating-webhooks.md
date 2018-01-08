@@ -18,6 +18,7 @@ The `topic` field of an event holds [a description](http://docsv2.dwolla.com/#ev
 **NOTE**: The `event` must be retrieved with a `client_credentials` granted access_token.
 
 ##### JSON
+
 ```jsonnoselect
 {
   "id": "cac95329-9fa5-42f1-a4fc-c08af7b868fb",
@@ -42,7 +43,8 @@ The `topic` field of an event holds [a description](http://docsv2.dwolla.com/#ev
 }
 ```
 
-#### Step A. Authenticating the webhook request
+## Step 3A. Authenticating the webhook request
+
 Before we process any data from the webhook we’ll want to validate that the request really came from Dwolla and not someone pretending to be Dwolla. Dwolla signs each webhook request with the `secret` you passed in when you created the webhook subscription. The signature is contained in the `X-Request-Signature-Sha-256` header and is a SHA256 HMAC hash of the request body with the key being your webhook secret.
 
 You can validate the webhook by generating the same SHA256 HMAC hash and comparing it to the signature sent with the payload.
@@ -57,9 +59,11 @@ payload_body)
   end
 end
 ```
+
 ```raw
 not available
 ```
+
 ```javascript
 var verifyGatewaySignature = function(proposed_signature, webhook_secret, payload_body) {
   var crypto    = require('crypto');
@@ -69,6 +73,7 @@ var verifyGatewaySignature = function(proposed_signature, webhook_secret, payloa
 return proposed_signature === hash;
 }
 ```
+
 ```python
 def verify_gateway_signature(proposed_signature, webhook_secret, payload_body):
   import hmac
@@ -78,6 +83,7 @@ def verify_gateway_signature(proposed_signature, webhook_secret, payload_body):
 
   return True if (signature == proposed_signature) else False
 ```
+
 ```php
 <?php
 function verifyGatewaySignature($proposedSignature, $webhookSecret, $payloadBody) {
@@ -87,7 +93,7 @@ function verifyGatewaySignature($proposedSignature, $webhookSecret, $payloadBody
 ?>
 ```
 
-#### Step B. Check for duplicate events
+## Step 3B. Check for duplicate events
 
 It is important to consider that multiple webhooks are fired for the same action on certain events. For example, multiple webhooks are fired for `Transfer` events, that is, two `transfer_created` events with different resource IDs (and, by extension, resource URLs) will be fired, one for each customer. To avoid doing any business logic twice, you would have to check if you have already received a webhook relating to the `Transfer` resource responsible for the event.
 

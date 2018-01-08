@@ -9,11 +9,12 @@ title: Webhooks | Process Webhooks
 description: Process webhooks for payments within your application by utilizing our open API with no per transaction fees. 
 ---
 
-# Example scenario
+# Processing webhooks: an example scenario
 
 Let's assume that you have a webhook subscription and Dwolla has just delivered the following payload to your specified endpoint:
 
 ##### Sample Payload
+
 ```jsonnoselect
 {
   "id": "cac95329-9fa5-42f1-a4fc-c08af7b868fb",
@@ -41,6 +42,7 @@ Let's assume that you have a webhook subscription and Dwolla has just delivered 
 For illustrative purposes, let's assume you are using Ruby on Rails with a controller defined to handle the POST request from Dwolla's servers. Your application logic will look a little something like this:
 
 ##### Ruby
+
 ```rubynoselect
 require 'dwolla_swagger'
 

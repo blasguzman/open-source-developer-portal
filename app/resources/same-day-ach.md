@@ -1,7 +1,7 @@
 ---
 layout: twoColumn
 section: resources
-type: article
+type: features
 title:  "Same Day ACH"
 description: "A walkthrough of Same Day ACH and leveraging 'next available' processing times for faster transfers."
 ---

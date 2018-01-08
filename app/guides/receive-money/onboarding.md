@@ -10,11 +10,11 @@ description: Leverage Dwolla's ach payment API to receive money via bank transfe
 ---
 # Step 1: Create a Customer and transfer
 
-### Step A: Obtain an application access token
+## Step 1A: Obtain an application access token
 
 Your application will exchange its `client_id`, `client_secret`, and `grant_type=client_credentials` for an application access token. An application access token can then be used to make calls to the Dwolla API on behalf of your application.
 
-### Step B: Create a Customer
+## Step 1B: Create a Customer
 
 Create a Customer for the user that is going to pay you. At a minimum, provide the user’s full name and email address to create the customer.
 
@@ -114,9 +114,13 @@ catch (Exception e) {
 
 When the Customer is created, you’ll receive the Customer URL in the location header.
 
-**Important**: Provide the IP address of the end-user accessing your application as the `ipAddress` parameter. This enhances fraud detection and tracking.
+<ol class = "alerts">
+    <li class="alert icon-alert-info">
+      Provide the IP address of the end-user accessing your application as the `ipAddress` parameter. This enhances fraud detection and tracking.
+    </li>
+</ol>
 
-### Step C: Attach a funding source to the Customer
+## Step 1C: Attach a funding source to the Customer
 
 Next you will attach a verified funding source to the Customer, which will be done using Instant Account Verification (IAV). This method will give the Customer the ability to add and verify their bank account in a matter of seconds by authenticating with their online banking credentials. Once the Customer reaches the page in your application to add a bank account you'll ask Dwolla’s server to [generate an IAV token](http://docsv2.dwolla.com/#generate-an-iav-token).
 
@@ -222,7 +226,7 @@ The customer will complete the IAV flow by authenticating with their online bank
 
 Great! The funding source should now be verified.
 
-### Step E: Create a transfer
+## Step 1D: Create a transfer
 
 Once the customer has verified their funding source, we can transfer funds from their bank account to your Dwolla account. You’ll need to supply your access token from step A, the customer’s ID from step B, and the customer’s funding source ID from step C:
 

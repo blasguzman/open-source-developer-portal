@@ -8,7 +8,6 @@ guide:
 title:  "Step 2: Create a verified customer"
 description: Create a verified customer within your Dwolla API application.
 ---
-
 # Step 2: Create a Verified Customer
 
 First, we’ll create a `Verified Customer` for Jane Merchant.
@@ -41,6 +40,7 @@ Authorization: Bearer 0Sn0W6kzNicvoWhDbQcVSKLRUpGjIdlPSEYyrHqrDDoRnQwE7Q
 HTTP/1.1 201 Created
 Location: https://api-sandbox.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C
 ```
+
 ```ruby
 request_body = {
   :firstName => 'Jane',
@@ -62,6 +62,7 @@ request_body = {
 customer = app_token.post "customers", request_body
 customer.response_headers[:location] # => "https://api-sandbox.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C"
 ```
+
 ```javascript
 var requestBody = {
   firstName: 'Jane',
@@ -84,6 +85,7 @@ appToken
   .post('customers', requestBody)
   .then(res => res.headers.get('location')); // => 'https://api-sandbox.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C'
 ```
+
 ```python
 request_body = {
   'firstName': 'Jane',
@@ -106,6 +108,7 @@ request_body = {
 customer = app_token.post('customers', request_body)
 customer.headers['location'] # => 'https://api-sandbox.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C'
 ```
+
 ```php
 <?php
 $customersApi = new DwollaSwagger\CustomersApi($apiClient);
@@ -130,6 +133,7 @@ $new_customer = $customersApi->create([
 print($new_customer); # => https://api-sandbox.dwolla.com/customers/AB443D36-3757-44C1-A1B4-29727FB3111C
 ?>
 ```
+
 ```java
 CustomersApi cApi = new CustomersApi(a);
 

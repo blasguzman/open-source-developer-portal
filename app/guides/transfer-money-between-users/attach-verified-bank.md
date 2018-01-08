@@ -103,9 +103,13 @@ $('#start').click(function() {
 </script>
 ```
 
-Joe Buyer will complete the IAV flow by authenticating with his online banking credentials. You'll know his bank account was successfully added and verified if you receive a JSON response in your callback that includes a link to the newly created funding source. 
+Joe Buyer will complete the IAV flow by authenticating with his online banking credentials. You'll know his bank account was successfully added and verified if you receive a JSON response in your callback that includes a link to the newly created funding source.
 
-* Sample response:  `{"_links":{"funding-source":{"href":"https://api-sandbox.dwolla.com/funding-sources/80275e83-1f9d-4bf7-8816-2ddcd5ffc197"}}}`
+##### Sample Response
+
+```Rawnoselect
+{"_links":{"funding-source":{"href":"https://api-sandbox.dwolla.com/funding-sources/80275e83-1f9d-4bf7-8816-2ddcd5ffc197"}}}
+```
 
 Great! Joe Buyer’s funding source is now verified and ready to send money.
 

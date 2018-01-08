@@ -1,7 +1,7 @@
 ---
 layout: twoColumn
 section: resources
-type: article
+type: integrations
 title:  "Sift Science Integration"
 description: "As part of Dwolla’s API, Partners can implement Sift Science’s machine learning model for real-time ACH fraud monitoring."
 ---

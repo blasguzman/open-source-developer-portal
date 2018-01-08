@@ -17,11 +17,11 @@ In this guide, we’ll cover the key points of transferring money:
 - Associate a funding source (bank or credit union account) with the customer
 - Transfer funds to a customer's linked bank account
 
-### Before you begin
+## Before you begin
 
 You need to have a [Sandbox account](/guides/sandbox-setup) already set up.
 
-### Next step: Customer onboarding
+## Next step: Customer onboarding
 
 The first step is to onboard a recipient for your transfer by creating a Customer and ensuring a funding source is added where money will be sent. Your application will need to capture the recipient's bank account information to pass through to Dwolla for secure storage.
 

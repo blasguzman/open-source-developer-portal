@@ -7,11 +7,57 @@
             <li><a href="/resources/changelog.html" {%if page.url contains '/changelog.html'%}class="active"{%endif%}>Change log</a></li>
             <li class="external-link"><a href="http://status.dwolla.com/" target="_blank"><span class="icon-sidenav-option">Status</span></a></li>
         </ul>
-        <h6>Articles</h6>
+        <h6>The API Basics</h6>
         <ul>
         {% for item in site.pages %}
 
             {% if item.section == 'resources' and item.type == 'article' %}
+            <li>
+                {% capture second_level_dir %}{{ page.url | remove_first: '/resources/' | split:'/' | first }}{% endcapture %}
+                {% capture file_name %}{{ item.url | remove_first: '/resources/' | remove_first: '.html' }}{% endcapture %}
+                <a href="{{ item.url }}" {% if page.url == item.url or second_level_dir == file_name %}class="active"{% endif %}>
+                    {{ item.title }}
+                </a>
+                <ul>
+                    {% assign pages = site.pages | sort:'weight'  %}
+                    {% for subItem in pages %}
+                        {% if subItem.section == item.title and subItem.type == 'article' %}
+                            <li><a href="{{ subItem.url }}" {% if page.url == subItem.url %}class="active"{% endif %}>{{ subItem.title }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+        <h6>Features and add-ons</h6>
+        <ul>
+        {% for item in site.pages %}
+
+            {% if item.section == 'resources' and item.type == 'features' %}
+            <li>
+                {% capture second_level_dir %}{{ page.url | remove_first: '/resources/' | split:'/' | first }}{% endcapture %}
+                {% capture file_name %}{{ item.url | remove_first: '/resources/' | remove_first: '.html' }}{% endcapture %}
+                <a href="{{ item.url }}" {% if page.url == item.url or second_level_dir == file_name %}class="active"{% endif %}>
+                    {{ item.title }}
+                </a>
+                <ul>
+                    {% assign pages = site.pages | sort:'weight'  %}
+                    {% for subItem in pages %}
+                        {% if subItem.section == item.title and subItem.type == 'article' %}
+                            <li><a href="{{ subItem.url }}" {% if page.url == subItem.url %}class="active"{% endif %}>{{ subItem.title }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+        <h6>Integrations</h6>
+        <ul>
+        {% for item in site.pages %}
+
+            {% if item.section == 'resources' and item.type == 'integrations' %}
             <li>
                 {% capture second_level_dir %}{{ page.url | remove_first: '/resources/' | split:'/' | first }}{% endcapture %}
                 {% capture file_name %}{{ item.url | remove_first: '/resources/' | remove_first: '.html' }}{% endcapture %}

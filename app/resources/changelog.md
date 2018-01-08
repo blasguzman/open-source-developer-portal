@@ -8,6 +8,21 @@ description: "Keep track of changes to the Dwolla API and official SDKs."
 
 <section class="change-log">
 	<h1>Completed</h1>
+	<h3>2017-11-16</h3>
+	<h4><em>CHANGED</em></h4>
+	<ul class="bullet">
+	    <li>Bank <a href ="https://docsv2.dwolla.com/#retrieve-a-funding-source-balance">balance check </a> functionality changing to be asynchronous and immediately return an HTTP 202. The response body for the 202 will contain a status relating to the processing of this request. Subsequent requests to this endpoint will return a 202 up until processing completes and then either return an HTTP 200 with the current balance or an HTTP 400 if there was an error (i.e. <code>UnsupportedBank</code>).</li>
+	</ul>
+	<h3>2017-11-16</h3>
+	<h4><em>ADDED</em></h4>
+	<ul class="bullet">
+	    <li>Added a new <code>customer_balance_inquiry_completed</code> event. Upon checking a Customer’s bank balance, Dwolla will immediately return an HTTP 202 with response body that includes a status of processing. This event will be triggered when the bank balance check has completed processing. To read more on how to trigger this event, check out our <a href="https://discuss.dwolla.com/t/check-it-out-new-events/4554"> forum post</a>.</li>
+	</ul>
+	<h3>2017-11-04</h3>
+	<h4><em>ADDED</em></h4>
+	<ul class="bullet">
+	    <li>Added a new <code>customer_bank_transfer_creation_failed</code> event. This event will be triggered when an attempt to initiate a transfer to a verified Customer’s bank was made, but failed. Transfers initiated to a verified Customer’s bank must pass through the verified Customer’s balance before being sent to a receiving bank. Dwolla will fail to create a transaction intended for a verified Customer’s bank if the funds available in the balance are less than the transfer amount. To read more on how to trigger this event, check out our <a href="https://discuss.dwolla.com/t/check-it-out-new-events/4554"> forum post</a>.</li>
+	</ul>
 	<h3>2017-06-29</h3>
 	<h4><em>CHANGED/DEPRECATED</em></h4>
 	<ul class="bullet">

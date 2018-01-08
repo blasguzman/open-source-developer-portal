@@ -1,7 +1,7 @@
 ---
 layout: twoColumn
 section: resources
-type: article
+type: integrations
 title:  "Dwolla + Plaid Integration"
 description: "Leverage Plaid’s bank verification with Dwolla’s ACH API for secure account ownership validation."
 ---
@@ -20,7 +20,7 @@ In this article we’ll cover the steps involved with obtaining a plaidToken, wh
 * Create a funding source for an Dwolla API Customer using a `plaidToken`
 * Obtain and store a unique funding source URL that belongs to the Dwolla API Customer
 
-![Screenshot of Dwolla and Plaid Integration](/images/dwolla-plaid-flow.png "Dwolla and Plaid Integration")
+![Screenshot of Dwolla and Plaid Integration](/images/dwolla-plaid-flow-2.png "Dwolla and Plaid Integration")
 
 ## Using Plaid + Dwolla
 
